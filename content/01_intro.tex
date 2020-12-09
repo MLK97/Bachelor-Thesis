@@ -1,0 +1,21 @@
+\chapter{Introduction}
+\section{Quantum Computing}
+Test \todo{hallo} test\footnote{Some footnote}.
+More Text.
+\begin{center}
+    \begin{tikzpicture}
+        \node[scale=1.0] {
+          \begin{quantikz}
+            \lstick{$\ket{q_\text{ion}}$} & \qw & \qw & \qw & \ctrl{1}
+            & \gate{R_y(-2\sqrt{\kappa_s}\lambda)} & \ctrl{1} \\
+            \lstick{$\ket{q_\text{laser}}$} & \qw & \gate{R_y(2\abs{\alpha}\lambda)} &
+            \gate{R_z(-\omega l \lambda^2)} & \targ{} & \ctrl{-1} & \targ{} \\
+                \lstick{Detector} & \cw & \cw  & \cw & \cw & \cw & \cw
+            \end{quantikz}
+        };
+    \end{tikzpicture}
+\end{center}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../MainDocument"
+%%% End:

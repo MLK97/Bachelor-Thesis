@@ -1,0 +1,76 @@
+% Kompatibilität mit neuen Zeichensätzen
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+
+% Bildunterschriften
+\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage[figurename=Abb.]{caption} 
+
+% Graifkimport
+\usepackage{graphicx}
+\usepackage{pdfpages}
+
+% Blatteigenschaften
+\usepackage{geometry}
+% \geometry{a4paper, left=25mm, right=25mm, top=25mm, bottom=25mm}
+\usepackage[onehalfspacing]{setspace} % Zeilenabstand 1.5
+
+% keine Einrückung
+% \setlength{\parindent}{0pt}
+% \usepackage{floatrow}
+
+% Mathematikpakete
+\usepackage{amsmath}
+\usepackage{upgreek}
+\usepackage{listings}
+\usepackage{siunitx}
+
+% Zeichenprogramme
+\usepackage{tikz}
+\usepackage{quantikz}
+
+% Bibliographie
+\usepackage[citestyle=authoryear, style=phys, backend=biber]{biblatex}
+\usepackage{csquotes}
+\addbibresource{bibliography.bib}
+
+% Referenzierung
+\usepackage{hyperref}
+\hypersetup{
+            colorlinks=false,
+            pdfborder=0 0 0,
+            pdfauthor   = {Maximilian Konrad},
+	        pdftitle    = {Quantum Computing},
+	        pdfsubject  = {Bachelorarbeit},
+	        pdfkeywords = {QuantumComputing, Bachelorarbeit}}
+\urlstyle{same}
+
+% Todos
+\usepackage{todonotes}
+
+% Footnote
+\usepackage{perpage}
+\MakePerPage{footnote}
+\usepackage[symbol]{footmisc}
+\setcounter{footnote}{2}
+\newcommand{\myfootnote}{\fnsymbol{footnote}}
+
+% Abstände vor und nach Formeln
+\setlength\abovedisplayshortskip{10pt}
+\setlength\belowdisplayshortskip{10pt}
+\setlength\abovedisplayskip{10pt}
+\setlength\belowdisplayskip{10pt}
+
+% Mathematische Formulierungen
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+% Silbentrennung
+% \hyphenation{haupt-söch-lich}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../MainDocument"
+%%% End:

@@ -1,7 +1,49 @@
 \chapter{Introduction}
-\section{Quantum Computing}
-Test \todo{hallo} test\footnote{Some footnote}.
-More Text.
+\section{Interesting Quantum Programming Languages}
+Qiskit, which is the most prominent and based around Python.
+q1tsim, which is based on Rust and the docmentation is mostly in Rust
+but apparently can be used in Python as well.
+\section{Quantum Fourier Transform}
+The quantum Fourier transform (QFT) transforms between two bases, the
+computational (Z) basis, and the Fourier basis. It can be written as a
+mapping
+\begin{equation}
+  \label{eq:2}
+  \ket{x} \mapsto \frac{1}{\sqrt{N}}\sum^{N-1}_{y=0}\omega^{xy}_{N}\ket{y}
+\end{equation}
+or as an unitary matrix
+\begin{equation}
+  \label{eq:3}
+  U_{\text{QFT}}= \frac{1}{\sqrt{N}}\sum^{N-1}_{x=0}\sum^{N-1}_{y=0}\omega^{xy}_N\ket{y}\bra{x}.
+\end{equation}
+The H-gate is the
+signle-qubit QFT, and it transfroms between the Z-basis states
+$\ket{0}$ and $\ket{1}$ to the X-basis states $\ket{+}$ and
+$\ket{-}$. In the same way, all multi-qubit states in the
+computational basis have corresponding states in the Fourier
+basis. The QFT is simply the function that transforms between these
+bases.
+\begin{align}
+  \label{eq:1}
+  \ket{\text{State in Computational Basis}}
+  &\overset{QFT}{\longrightarrow} \ket{\text{State in Fourier
+    Basis}}\\
+  QFT\ket{x} &= \ket{\tilde{x}}.\\
+\end{align}
+
+In the computational basis, we store numbers in binary, just like a
+Johnson Counter.
+The first qubit has the highest frequency and changes every iteration,
+while the last one has the lowest frequency.
+In the Fourier basis, we store numbers using different rotations
+around the Z-axis.
+To encode the state $\ket{\tilde{5}}$ on 4 qubits, we rotate the
+leftmost qubit by $\frac{5}{2^n} = \frac{5}{2^4} = \frac{5}{16}\times
+2\pi \text{radians}$. For the next qubit the numerator is doubled,
+thus $\frac{10}{16} \times 2\pi$.
+This leads to the result, that now the first qubit has the lowest
+frequency, while the fourth qubit has the quickest. Note that in the
+Fourier basis, we are no longer counting binarily.
 \begin{center}
     \begin{tikzpicture}
         \node[scale=1.0] {

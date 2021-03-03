@@ -19,14 +19,14 @@ E = E +- i eta
 """
 
 t = 1
-epsilon = 0.5
+epsilon = 5
 
 """
 Compute g_11 for a given Energy
 """
 Green = np.complex128([]) # Stores values G_11(E)
 Green_analytical = np.complex128([])
-E = np.arange(-10, 10, 0.2) + 0.01j # Stores Energy values (x-axis)
+E = np.arange(-10, 15, 0.2) + 0.01j # Stores Energy values (x-axis)
 g_11 = [] # Stores g_11(E) values
 
 
@@ -60,12 +60,7 @@ from Zilly.
 """
 
 def analytical_Green(E):
-    if (E-epsilon) <= -2*t:
-        G_11 = (E-epsilon)/(2*t**2) + 1/(2*t**2) * np.sqrt((E-epsilon)**2-4*t**2)
-    if np.abs(E-epsilon) < 2*t:
-        G_11 = (E-epsilon)/(2*t**2) - 1j/(2*t**2) * np.sqrt(4*t**2-(E-epsilon)**2)
-    if E-epsilon >= 2*t:
-        G_11 = (E-epsilon)/(2*t**2) - 1/(2*t**2) * np.sqrt((E-epsilon)**2-4*t**2)
+    G_11 = (E-epsilon)/(2*t**2) - 1/(2*t**2) * np.sqrt((E-epsilon)**2-4*t**2)*np.sign(E.real - epsilon)
     return G_11
 
 
@@ -82,7 +77,7 @@ plt.plot(E, Green_analytical_real, label="Analytical Re($G_{11}$)", linestyle="d
 plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{11}$)", linestyle="dashed", color="red")
 
 plt.grid(True)
-plt.title("Approximation of $G_{11}$ by Iteration")
+plt.title("$G_{11}$ by Iteration for $t = 1$ and $\epsilon = 5$")
 plt.ylabel("$G_{11}$")
 plt.xlabel("Energy")
 plt.legend()

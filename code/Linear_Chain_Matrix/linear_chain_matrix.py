@@ -23,7 +23,7 @@ E = E +- i eta
 """
 
 t = 1
-epsilon = 0
+epsilon = 0.5
 
 t_mat = np.array([[0, 0], [t, 0]])
 t_dag = np.transpose(t_mat)
@@ -33,7 +33,7 @@ Compute g_11 for a given Energy
 """
 Green = np.complex128([]) # Stores values G_11(E)
 Green_analytical = np.complex128([])
-E = np.arange(-5, 5, 0.2) + 0.01j # Stores Energy values (x-axis)
+E = np.arange(-10, 10, 0.2) + 0.01j # Stores Energy values (x-axis)
 g_11 = [] # Stores g_11(E) values
 
 def calculate_g(E):
@@ -82,7 +82,7 @@ plt.plot(E, Green_analytical_real, label="Analytical Re($G_{11}$)", linestyle="d
 plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{11}$)", linestyle="dashed", color="blue")
 
 plt.grid(True)
-plt.title("Approximation of $G_{11}$ by Iteration")
+plt.title("$G_{11}$ by Iteration")
 plt.ylabel("$G_{11}$")
 plt.xlabel("Energy")
 plt.legend()

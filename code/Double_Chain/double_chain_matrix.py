@@ -25,7 +25,7 @@ E = E +- i eta
 t = 1
 epsilon = 0
 
-t_mat = np.array([[t, 0], [0, t]])
+t_mat = np.array([[1, 0], [0, 1]])
 t_dag = np.transpose(t_mat)
 
 """
@@ -91,7 +91,7 @@ plt.plot(E, Green_analytical_real, label="Analytical Re($G_{11}$)", linestyle="d
 plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{11}$)", linestyle="dashed", color="blue")
 
 plt.grid(True)
-plt.title("$G_{11}$ by Iteration for $t = 2 \in [0, 2]$ and $\epsilon = 0$")
+plt.title("$G_{11}$ by Iteration for $t = 1 \in [0, 2]$ and $\epsilon = 0$")
 plt.ylabel("$G_{11}$")
 plt.xlabel("Energy")
 plt.legend()

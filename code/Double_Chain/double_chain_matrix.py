@@ -33,7 +33,7 @@ Compute g_11 for a given Energy
 """
 Green = np.complex128([]) # Stores values G_11(E)
 Green_analytical = np.complex128([])
-E = np.arange(-5, 5, 0.2) + 0.01j # Stores Energy values (x-axis)
+E = np.arange(-10, 10, 0.2) + 0.01j # Stores Energy values (x-axis)
 g_11 = [] # Stores g_11(E) values
 
 def calculate_g(E):
@@ -64,25 +64,34 @@ Computing the analytical equations (3.21) and (3.22)
 from Zilly.
 """
 
-def analytical_Green(E):
-    G_11 = (E-epsilon)/(2*t**2) - 1/(2*t**2) * np.sqrt((E-epsilon)**2-4*t**2)*np.sign(E.real - epsilon)
+#Problem for E = [-1, 1]
+def analytical_Green(E, t):
+    G_11 = 0
+    if E < -2+t:
+        G_11 = (E/2)+(1/4)*(np.sqrt((E-t)**2-4)+np.sqrt((E+t)**2-4))
+    if -2 + t <= E and E <= 2 - t:
+        # makes some dumb shit when rewriting the last sum without
+        # explicitily telling that it is complex there
+        G_11 = (E/2)+(1/4)*(-np.sqrt((E+t)**2-4)-1j*np.sqrt(4-(E-t)**2))
+    if 2 - t <= E:
+        G_11 = (E/2)+(1/4)*(-np.sqrt((E+t)**2-4)-np.sqrt((E-t)**2-4))
     return G_11
 
 
 for value in E:
-    Green_analytical = np.append(Green_analytical, analytical_Green(value))
+    Green_analytical = np.append(Green_analytical, analytical_Green(value, t))
 
 Green_analytical_real = Green_analytical.real
 Green_analytical_imag = Green_analytical.imag
 
 plt.plot(E, Green_real, label="Re($G_{11}$)", color="red")
-plt.plot(E, Green_imag, label="Im($G_{11}$)", color="blue")
+plt.plot(E, Green_imag, label="Im($G_{11}$)", color="red")
 
-# plt.plot(E, Green_analytical_real, label="Analytical Re($G_{11}$)", linestyle="dashed", color="blue")
-# plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{11}$)", linestyle="dashed", color="blue")
+plt.plot(E, Green_analytical_real, label="Analytical Re($G_{11}$)", linestyle="dashed", color="blue")
+plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{11}$)", linestyle="dashed", color="blue")
 
 plt.grid(True)
-plt.title("Approximation of $G_{11}$ by Iteration")
+plt.title("$G_{11}$ by Iteration for $t = 2 \in [0, 2]$ and $\epsilon = 0$")
 plt.ylabel("$G_{11}$")
 plt.xlabel("Energy")
 plt.legend()

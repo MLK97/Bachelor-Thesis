@@ -22,7 +22,7 @@ g_11 = [(E)1-H]^-1 and
 E = E +- i eta
 """
 
-t = 3
+t = 1
 epsilon = 0
 
 t_mat = np.array([[1, 0], [0, 1]])
@@ -67,12 +67,16 @@ from Zilly.
 #Problem for E = [-1, 1]
 def analytical_Green(E, t):
     G_11 = 0
-    if E < -2+t:
+    if E < -2-t:
         G_11 = (E/2)+(1/4)*(np.sqrt((E-t)**2-4)+np.sqrt((E+t)**2-4))
-    if -2 + t <= E and E <= 2 - t:
+    if -2 - t <= E and E <= -t + 2:
+        G_11 = (E/2)+(1/4)*(np.sqrt((E-t)**2-4)-1j*np.sqrt(4-(E+t)**2))
+    if -t + 2 < E and E < t - 2:
+        G_11 = (E/2)+(1/4)*(np.sqrt((E-t)**2-4)-np.sqrt((E+t)**2-4))
+    if t - 2 <= E <= t + 2:
         G_11 = (E/2)+(1/4)*(-np.sqrt((E+t)**2-4)-1j*np.sqrt(4-(E-t)**2))
-    if 2 - t <= E:
-        G_11 = -(t/2)+(1/4)*(-np.sqrt((E+t)**2-4)-np.sqrt((E-t)**2-4))
+    if 2 + t < E:
+        G_11 = (E/2)+(1/4)*(-np.sqrt((E+t)**2-4)-np.sqrt((E-t)**2-4))
     return G_11
 
 
@@ -85,8 +89,8 @@ Green_analytical_imag = Green_analytical.imag
 plt.plot(E, Green_real, label="Re($G_{11}$)", color="red")
 plt.plot(E, Green_imag, label="Im($G_{11}$)", color="red")
 
-#plt.plot(E, Green_analytical_real, label="Analytical Re($G_{11}$)", linestyle="dashed", color="blue")
-#plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{11}$)", linestyle="dashed", color="blue")
+plt.plot(E, Green_analytical_real, label="Analytical Re($G_{11}$)", linestyle="dashed", color="blue")
+plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{11}$)", linestyle="dashed", color="blue")
 
 plt.grid(True)
 plt.title("$G_{11}$ by Iteration for $t = 3 \in [2, \infty)$ and $\epsilon = 0$")

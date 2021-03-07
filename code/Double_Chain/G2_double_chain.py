@@ -33,7 +33,7 @@ Compute g_11 for a given Energy
 """
 Green = np.complex128([]) # Stores values G_11(E)
 Green_analytical = np.complex128([])
-E = np.arange(-20, 20, 0.2) + 0.01j # Stores Energy values (x-axis)
+E = np.arange(-10, 10, 0.2) + 0.01j # Stores Energy values (x-axis)
 g = [] # Stores g_11(E) values
 
 def calculate_g(E):
@@ -56,8 +56,8 @@ def calculate_Green(g):
 
 Green = np.array([calculate_Green(value) for value in g])
 
-Green_real = np.array([Green[i][1][0].real for i in range(len(Green))])
-Green_imag = np.array([Green[i][1][0].imag for i in range(len(Green))])
+Green_real = np.array([Green[i][0][1].real for i in range(len(Green))])
+Green_imag = np.array([Green[i][0][1].imag for i in range(len(Green))])
 
 """
 Computing the analytical equations (3.21) and (3.22)
@@ -68,15 +68,15 @@ from Zilly.
 def analytical_Green(E, t):
     G = 0
     if E < -2-t:
-        G = (E/2)+(1/4)*(np.sqrt((E-t)**2-4)+np.sqrt((E+t)**2-4))
+        G = -(t/2)+(1/4)*(np.sqrt((E-t)**2-4)-np.sqrt((E+t)**2-4))
     if -2 - t <= E and E <= -t + 2:
-        G = (E/2)+(1/4)*(np.sqrt((E-t)**2-4)-1j*np.sqrt(4-(E+t)**2))
+        G = -(t/2)+(1/4)*(np.sqrt((E-t)**2-4)+1j*np.sqrt(4-(E+t)**2))
     if -t + 2 < E and E < t - 2:
-        G = (E/2)+(1/4)*(np.sqrt((E-t)**2-4)-np.sqrt((E+t)**2-4))
+        G = -(t/2)+(1/4)*(-1j*np.sqrt(4-(E-t)**2)+1j*np.sqrt(4-(E+t)**2))
     if t - 2 <= E <= t + 2:
-        G = (E/2)+(1/4)*(-np.sqrt((E+t)**2-4)-1j*np.sqrt(4-(E-t)**2))
+        G = -(t/2)+(1/4)*(np.sqrt((E+t)**2-4)-1j*np.sqrt(4-(E-t)**2))
     if 2 + t < E:
-        G = (E/2)+(1/4)*(-np.sqrt((E+t)**2-4)-np.sqrt((E-t)**2-4))
+        G = -(t/2)+(1/4)*(np.sqrt((E+t)**2-4)-np.sqrt((E-t)**2-4))
     return G
 
 
@@ -89,11 +89,11 @@ Green_analytical_imag = Green_analytical.imag
 plt.plot(E, Green_real, label="Re($G_{11}$)", color="red")
 plt.plot(E, Green_imag, label="Im($G_{11}$)", color="red")
 
-#plt.plot(E, Green_analytical_real, label="Analytical Re($G_{12}$)", linestyle="dashed", color="blue")
-#plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{12}$)", linestyle="dashed", color="blue")
+plt.plot(E, Green_analytical_real, label="Analytical Re($G_{12}$)", linestyle="dashed", color="blue")
+plt.plot(E, Green_analytical_imag, label="Analytical Im($G_{12}$)", linestyle="dashed", color="blue")
 
 plt.grid(True)
-plt.title("$G_{12}$ by Iteration for $t = 3 \in [2, \infty)$ and $\epsilon = 0$")
+plt.title("$G_{12}$ by Iteration for $t = 0.5 \in [0, 2]$ and $\epsilon = 0$")
 plt.ylabel("$G_{11}$")
 plt.xlabel("Energy")
 plt.legend()

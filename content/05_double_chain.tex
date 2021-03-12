@@ -27,6 +27,46 @@ For this one needs to just slightly alter the Hamiltonian of equation~\ref{eq:1}
   H = \sum_{i = 1}^{\infty}\epsilon\left[\ket{i,1}\bra{i,1}+\ket{i,2}\bra{i,2}\right]+t\left[\ket{i, 1}\bra{i+1,
       1}+\ket{i,2}\bra{i+1, 2}+h.c.\right]+\overline{t}\left[\ket{i,1}\bra{i,2}+h.c.\right].
 \end{equation}
+
+Instead of the plots depicted in figure~\ref{fig:G11_original}
+
+\begin{figure}[htb!]
+  \begin{subfigure}{.5\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{code/Double_Chain/plots/original.pdf}
+    \caption{$G_{11}$ by iteration for $t=1 \in [0, 2]$ and
+      $\epsilon = 0$}
+  \end{subfigure}
+  \begin{subfigure}{.5\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{code/Double_Chain/plots/higher_t.pdf}
+    \caption{$G_{11}$ by iteration for $t=3 \in [2, \infty)$ and
+      $\epsilon = 0$}
+  \end{subfigure}
+  \caption{Surface Green function for $G_{11}$}
+  \label{fig:G11_original}
+\end{figure}
+
+one gets
+
+
+\begin{figure}[hbt!]
+  \begin{subfigure}{.5\linewidth}
+    \centering
+x    \includegraphics[width=\linewidth]{code/Double_Chain/plots/G1_tt_3.pdf}
+    \caption{$G_{11}$ by iteration for $t=1, \overline{t}=3 \in [0, 2]$ and
+      $\epsilon = 0$}
+  \end{subfigure}
+  \begin{subfigure}{.5\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{code/Double_Chain/plots/higher_t.pdf}
+    \caption{$G_{11}$ by iteration for $t=3 \in [2, \infty)$ and
+      $\epsilon = 0$}
+  \end{subfigure}
+  \caption{Surface Green function for $G_{11}$}
+  \label{fig:G11_original}
+\end{figure}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../MainDocument"

@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from matplotlib import rc
 import numpy as np
+from numpy.linalg import multi_dot
+from numpy.linalg import inv
 
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern'], 'size': 20})
 rc('text', usetex=True)
@@ -53,17 +55,17 @@ def calc_g(E, eps):
     return 1/(E-eps)
 
 def calc_Sigma(t, g):
-    return t**2 * g**2
+    return tt**2 * g
 
 def calc_Gamma(Sigma):
     return Sigma.imag
 
 def calc_G(E, eps_dftc, Sigma_L, Sigma_R):
-    return (E - eps_dftc - Sigma_L, Sigma_R)**(-1)
+    return np.divide(1, (E - eps_dftc - Sigma_L, Sigma_R))  # maybe this gives wrong result?
 
 def calc_Transmission(Gamma_L, G_cc_r, Gamma_R, G_cc_a):
     tmp = Gamma_L * G_cc_r * Gamma_R * G_cc_a
-    return 4*np.trace(tmp)
+    return 4 * tmp # eigentlich Spur
 
 """
 Variables containing the previously
@@ -83,10 +85,22 @@ Sigma_R_a = Sigma_L_a # Assume L and R are same (change later)
 Gamma_L = np.array([calc_Gamma(value) for value in Sigma_L_a])
 Gamma_R = np.array([calc_Gamma(value) for value in Sigma_R_a])
 
-for n in range(1):
-    print(E[n])
-    print(Sigma_L_r[n])
-    G_cc_r = calc_G(E[n], eps_dfct, Sigma_L_r[n], Sigma_R_r[n])
-    G_cc_a = np.conjugate(G_cc_r)
+G_cc_r = np.array([calc_G(energy, eps_dfct, sig_L, sig_R) for energy, sig_L, sig_R in zip(E, Sigma_L_r, Sigma_R_r)])
+G_cc_a = np.conjugate(G_cc_r)
 
-# T = calc_Transmission(Gamma_L, G_cc_r, Gamma_R, G_cc_a)
+T = np.array([calc_Transmission(gam_L, green_r, gam_R, green_a) for gam_L, green_r, gam_R, green_a in zip(Gamma_L, G_cc_r, Gamma_R, G_cc_a)])
+
+# print("g_LL_r:", len(g_LL_r))
+# print("Sigma_L_r:", len(Sigma_L_r))
+# print("Gamma_L:", len(Gamma_L))
+# print("G_cc_r:", len(G_cc_r))
+# print("T:", T)
+
+plt.plot(E.real, T.real, label="Transmission Real")
+
+plt.grid(True)
+plt.title("Transmission plot")
+plt.ylabel("T")
+plt.xlabel("E")
+plt.legend()
+plt.show()
